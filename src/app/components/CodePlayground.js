@@ -6,15 +6,14 @@ const CodePlayground = () => {
   const [activeTab, setActiveTab] = useState('js');
 
   const codeSnippets = {
-    js: `const axios = require('axios');\n\n// Base URL for all API calls\nconst baseUrl = 'https://api.kidjig.com/provider';\n\n// Example: Chat completion with GPT-3.5\nconst response = await axios.post(\n  \`\${baseUrl}/api/v1/openai/chat/gpt-3.5-turbo\`,\n  {\n    prompt: "What is the capital of France?",\n    stream: false,\n    config: {\n      temperature: 0.7,\n      maxOutputTokens: 4096,\n      topP: 1,\n      topK: 40\n    }\n  },\n  {\n    headers: {\n      'X-Api-Key': 'YOUR_API_KEY',\n      'Content-Type': 'application/json'\n    }\n  }\n);\n\nconsole.log(response.data);`,
-    python: `import requests\n\n# Base URL for all API calls\nbase_url = 'https://api.kidjig.com/provider'\n\n# Example: Chat completion with GPT-3.5\nresponse = requests.post(\n    f"{base_url}/api/v1/openai/chat/gpt-3.5-turbo",\n    json={\n        "prompt": "What is the capital of France?",\n        "stream": False,\n        "config": {\n            "temperature": 0.7,\n            "maxOutputTokens": 4096,\n            "topP": 1,\n            "topK": 40\n        }\n    },\n    headers={\n        'X-Api-Key': 'YOUR_API_KEY',\n        'Content-Type': 'application/json'\n    }\n)\n\nprint(response.json())`,
+    js: `const axios = require('axios');\n\nconst baseUrl = 'https://api.kidjig.com/provider';\n\nconst response = await axios.post(\n  \`\${baseUrl}/api/v1/openai/chat/gpt-3.5-turbo\`,\n  {\n    prompt: "What is the capital of France?",\n    stream: false,\n    config: {\n      temperature: 0.7,\n      maxOutputTokens: 4096,\n      topP: 1,\n      topK: 40\n    }\n  },\n  {\n    headers: {\n      'X-Api-Key': 'YOUR_API_KEY',\n      'Content-Type': 'application/json'\n    }\n  }\n);\n\nconsole.log(response.data);`,
+    python: `import requests\n\nbase_url = 'https://api.kidjig.com/provider'\n\nresponse = requests.post(\n    f"{base_url}/api/v1/openai/chat/gpt-3.5-turbo",\n    json={\n        "prompt": "What is the capital of France?",\n        "stream": False,\n        "config": {\n            "temperature": 0.7,\n            "maxOutputTokens": 4096,\n            "topP": 1,\n            "topK": 40\n        }\n    },\n    headers={\n        'X-Api-Key': 'YOUR_API_KEY',\n        'Content-Type': 'application/json'\n    }\n)\n\nprint(response.json())`,
     curl: `curl -X POST 'https://api.kidjig.com/provider/api/v1/openai/chat/gpt-3.5-turbo' \\\n  -H 'X-Api-Key: YOUR_API_KEY' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    "prompt": "What is the capital of France?",\n    "stream": false,\n    "config": {\n      "temperature": 0.7,\n      "maxOutputTokens": 4096,\n      "topP": 1,\n      "topK": 40\n    }\n  }'`
   };
 
   return (
     <section className="bg-[#030712] py-24 px-6 relative flex flex-col items-center">
       
-      {/* 1. Header Section */}
       <div className="max-w-3xl w-full text-center mb-16 space-y-6">
         <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight">
           Make your first <span className="text-indigo-500">API call</span>
@@ -27,13 +26,10 @@ const CodePlayground = () => {
 
       <div className="max-w-5xl w-full space-y-12">
         
-        {/* 2. Interactive Terminal (Now First) */}
         <div className="relative">
-          {/* Subtle glow effect */}
           <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-2xl blur-xl"></div>
           
           <div className="relative bg-[#0b0f1a]/90 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden group">
-            {/* Terminal Header */}
             <div className="flex items-center justify-between px-6 py-4 bg-white/5 border-b border-white/5">
               <div className="flex items-center gap-6">
                 <div className="flex gap-1.5 mr-2">
@@ -64,7 +60,6 @@ const CodePlayground = () => {
               </button>
             </div>
 
-            {/* Code Body */}
             <div className="p-6 md:p-8 overflow-x-auto min-h-[380px]">
               <pre className="font-mono text-sm leading-relaxed">
                 <code>
@@ -72,9 +67,7 @@ const CodePlayground = () => {
                     <div key={i} className="flex hover:bg-white/[0.02] rounded px-2 transition-colors">
                       <span className="w-8 shrink-0 text-gray-800 select-none text-xs">{i + 1}</span>
                       <span className="whitespace-pre">
-                        {line.includes('//') || line.includes('#') ? (
-                          <span className="text-emerald-500/60 italic">{line}</span>
-                        ) : line.includes("'") || line.includes('"') || line.includes('`') ? (
+                        {line.includes("'") || line.includes('"') || line.includes('`') ? (
                           <span className="text-amber-200/80">{line}</span>
                         ) : (
                           <span className="text-indigo-300/80">{line}</span>
@@ -88,7 +81,6 @@ const CodePlayground = () => {
           </div>
         </div>
 
-        {/* 3. Authorization Card (Now at the Bottom) */}
         <div className="w-full bg-[#0b0f1a] border border-white/10 rounded-2xl p-6 md:p-10 shadow-2xl relative overflow-hidden transition-all duration-500 hover:border-white/20">
           <div className="relative z-10">
             <h3 className="text-white font-bold text-xl mb-3 tracking-tight">Authorization</h3>
@@ -117,7 +109,6 @@ const CodePlayground = () => {
             </div>
           </div>
 
-          {/* Abstract background accent for the bottom card */}
           <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-600/5 rounded-full blur-3xl"></div>
         </div>
 

@@ -4,15 +4,12 @@ import React from 'react';
 
 const Feature = () => {
   return (
-    /* Main container using the deep dark theme base */
     <div className="bg-[#030712] text-white min-h-screen selection:bg-blue-500/30">
       
       <section className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16 py-24 px-6 relative">
         
-        {/* Decorative background glow for the whole section */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-        {/* Left Content Area */}
         <div className="w-full md:w-1/2 space-y-8 relative z-10">
           <div className="space-y-4">
             <span className="text-gray-500 text-xs font-bold uppercase tracking-[0.3em]">
@@ -37,18 +34,13 @@ const Feature = () => {
           </div>
         </div>
 
-        {/* Right Visual Area (GitHub Themed) */}
         <div className="w-full md:w-1/2 relative group">
-          {/* External Border Frame (Glassmorphism) */}
           <div className="relative aspect-square bg-[#0b0f1a]/50 border border-white/10 rounded-[40px] flex items-center justify-center overflow-hidden backdrop-blur-sm shadow-2xl transition-all duration-500 group-hover:border-blue-500/30">
             
-            {/* The "Nebula" Glow Effect from image_136c38.png */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(29,78,216,0.15),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             
-            {/* Animated white glow behind the logo */}
             <div className="absolute w-64 h-64 bg-white/[0.03] blur-[80px] rounded-full group-hover:bg-blue-500/[0.06] transition-colors duration-700"></div>
 
-            {/* GitHub SVG Logo */}
             <svg 
               className="w-48 h-48 text-white opacity-90 transition-all duration-700 group-hover:scale-110 group-hover:opacity-100 group-hover:drop-shadow-[0_0_40px_rgba(255,255,255,0.3)]" 
               viewBox="0 0 24 24" 
@@ -62,13 +54,11 @@ const Feature = () => {
               <path d="M9 18c-4.51 2-5-2-7-2" />
             </svg>
 
-            {/* Grid Pattern Overlay (Subtle) */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
                  style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
             </div>
           </div>
 
-          {/* Bottom badge accent similar to your "Protected by AES" look */}
           <div className="absolute -bottom-6 -right-6 bg-blue-600/10 border border-blue-500/20 backdrop-blur-md px-4 py-2 rounded-lg transition-transform duration-500 group-hover:translate-x-2">
             <span className="text-[10px] font-mono text-blue-400 uppercase tracking-widest font-bold">
               Multi-Language Support
