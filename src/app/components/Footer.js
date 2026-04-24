@@ -4,6 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear(); // dynamic year (good commit change)
+
   const footerData = {
     Developers: [
       { name: "Files", href: "#" },
@@ -24,7 +26,7 @@ const Footer = () => {
       { name: "Youtube", href: "#" },
     ],
     Legal: [
-      { name: "Privacy Polices", href: "#" },
+      { name: "Privacy Policy", href: "#" }, // fixed typo
       { name: "Terms of Service", href: "#" },
     ],
   };
@@ -43,7 +45,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link 
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors duration-200 text-[15px] font-light"
+                    className="text-gray-400 hover:text-white hover:underline transition-all duration-200 text-[15px] font-light"
                   >
                     {link.name}
                   </Link>
@@ -63,7 +65,7 @@ const Footer = () => {
             </p>
           </div>
           <div className="pt-8 text-gray-600 text-xs">
-            © 2026 Kidjig. All rights reserved.
+            © {currentYear} Kidjig. All rights reserved.
           </div>
         </div>
       </div>
