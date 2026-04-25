@@ -4,6 +4,13 @@ import React, { useState } from 'react';
 
 const CodePlayground = () => {
   const [activeTab, setActiveTab] = useState('js');
+  const [copied, setCopied] = useState(false); // new state
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(codeSnippets[activeTab]);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500); // reset after 1.5s
+  };
 
   const codeSnippets = {
     js: `const axios = require('axios');\n\nconst baseUrl = 'https://api.kidjig.com/provider';\n\nconst response = await axios.post(\n  \`\${baseUrl}/api/v1/openai/chat/gpt-3.5-turbo\`,\n  {\n    prompt: "What is the capital of France?",\n    stream: false,\n    config: {\n      temperature: 0.7,\n      maxOutputTokens: 4096,\n      topP: 1,\n      topK: 40\n    }\n  },\n  {\n    headers: {\n      'X-Api-Key': 'YOUR_API_KEY',\n      'Content-Type': 'application/json'\n    }\n  }\n);\n\nconsole.log(response.data);`,
@@ -52,11 +59,12 @@ const CodePlayground = () => {
                   </button>
                 ))}
               </div>
+
               <button 
-                onClick={() => navigator.clipboard.writeText(codeSnippets[activeTab])}
+                onClick={handleCopy}
                 className="text-[10px] text-gray-500 hover:text-white uppercase font-bold tracking-widest transition-colors"
               >
-                Copy
+                {copied ? "Copied!" : "Copy"}
               </button>
             </div>
 
@@ -65,7 +73,7 @@ const CodePlayground = () => {
                 <code>
                   {codeSnippets[activeTab].split('\n').map((line, i) => (
                     <div key={i} className="flex hover:bg-white/[0.02] rounded px-2 transition-colors">
-                      <span className="w-8 shrink-0 text-gray-800 select-none text-xs">{i + 1}</span>
+                      <span className="w-8 shrink-0 text-gray-700 select-none text-xs">{i + 1}</span>
                       <span className="whitespace-pre">
                         {line.includes("'") || line.includes('"') || line.includes('`') ? (
                           <span className="text-amber-200/80">{line}</span>
@@ -79,37 +87,6 @@ const CodePlayground = () => {
               </pre>
             </div>
           </div>
-        </div>
-
-        <div className="w-full bg-[#0b0f1a] border border-white/10 rounded-2xl p-6 md:p-10 shadow-2xl relative overflow-hidden transition-all duration-500 hover:border-white/20">
-          <div className="relative z-10">
-            <h3 className="text-white font-bold text-xl mb-3 tracking-tight">Authorization</h3>
-            <p className="text-gray-400 text-sm mb-8 max-w-2xl leading-relaxed">
-              To authenticate your requests, you must include your unique API key in the 
-              <code className="text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded mx-1">X-Api-Key</code> 
-              header. Never share this key in client-side code.
-            </p>
-            
-            <div className="flex flex-wrap items-center gap-4">
-              <div className="bg-[#1d4ed8] text-white font-mono text-sm px-5 py-3 rounded-xl flex items-center gap-4 shadow-[0_0_30px_rgba(29,78,216,0.2)] border border-blue-400/20">
-                <span className="select-all">X-Api-Key: YOUR_API_KEY</span>
-                <button 
-                  onClick={() => navigator.clipboard.writeText('X-Api-Key: YOUR_API_KEY')}
-                  className="hover:text-blue-200 transition-colors border-l border-white/20 pl-4"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-              </div>
-              
-              <span className="text-gray-600 text-[10px] uppercase font-bold tracking-widest">
-                Protected by AES-256
-              </span>
-            </div>
-          </div>
-
-          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-600/5 rounded-full blur-3xl"></div>
         </div>
 
       </div>
